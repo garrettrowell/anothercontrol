@@ -11,6 +11,7 @@ plan adhoc::myplan(
   #      default: { fail_plan($backup_result_or_error) } # handle unexpected errors
   #    }
   #    run_task('exec', get_targets($backup_result.ok_set), 'command' => 'echo hello')
+
   $result_or_error = run_task('exec', $targets, 'command' => 'whoami', '_catch_errors' => true)
   $result = case $result_or_error {
     # When the plan returned a ResultSet use it.
@@ -20,6 +21,6 @@ plan adhoc::myplan(
     # The sub-plan failed for an unexpected reason.
     default : { fail_plan($result_or_error) } }
   # Run a task on the successful targets
-  out::message("${result.ok_set.targets}")
-  run_task('exec', $result.targets, 'command' => 'echo hello')
+
+  run_task('exec', $result.ok_set.targets, 'command' => 'echo hello')
 }
