@@ -17,10 +17,11 @@ plan adhoc::myplan(
     # When the plan returned a ResultSet use it.
     ResultSet: { $result_or_error }
     # If the run_task failed extract the result set from the error.
-    Error['bolt/run-failure'] : { $result_or_error.details['result_set'] }
+    #Error['bolt/run-failure'] : { $result_or_error.details['result_set'] }
     # The sub-plan failed for an unexpected reason.
     default : { fail_plan($result_or_error) } }
-  # Run a task on the successful targets
 
+
+  # Run a task on the successful targets
   run_task('exec', $result.ok_set.targets, 'command' => 'echo hello')
 }
