@@ -20,6 +20,6 @@ plan adhoc::myplan(
     # The sub-plan failed for an unexpected reason.
     default : { fail_plan($result_or_error) } }
   # Run a task on the successful targets
-  out::message("${result.ok_set}")
-  run_task('exec', $result.ok_set, 'command' => 'echo hello')
+  out::message("${result.targets}")
+  run_task('exec', $result.targets, 'command' => 'echo hello')
 }
