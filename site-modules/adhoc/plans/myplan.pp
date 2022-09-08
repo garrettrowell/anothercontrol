@@ -4,7 +4,7 @@ plan adhoc::myplan(
   TargetSpec $targets,
 ) {
 
-    $backup_result_or_error = run_task('exec', $target, 'command' => 'whoami', '_catch_errors' => true)
+    $backup_result_or_error = run_task('exec', $targets, 'command' => 'whoami', '_catch_errors' => true)
     $backup_result = case $backup_result_or_error {
       ResultSet: { $backup_result_or_error } # this is when successful
       Error['bolt/run-failure']: { $backup_result_or_error.details['result_set'] } # if an error extract its result set
