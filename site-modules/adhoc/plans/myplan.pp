@@ -10,6 +10,6 @@ plan adhoc::myplan(
       Error['bolt/run-failure']: { $backup_result_or_error.details['result_set'] } # if an error extract its result set
       default: { fail_plan($backup_result_or_error) } # handle unexpected errors
     }
-    run_task('exec', $backup_result.ok_set, 'command' => 'echo hello')
+    run_task('exec', get_targets($backup_result.ok_set), 'command' => 'echo hello')
 
 }
