@@ -8,7 +8,6 @@
 # as should the default node definition if you want to use it.
 
 ## Active Configurations ##
-
 # Disable filebucket by default for all File resources:
 # https://github.com/puppetlabs/docs-archive/blob/master/pe/2015.3/release_notes.markdown#filebucket-resource-no-longer-created-by-default
 File { backup => false }
@@ -28,7 +27,7 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  Archive {
+  Archive <| tag == 'comply' |> {
     provider => 'ruby',
   }
 }
