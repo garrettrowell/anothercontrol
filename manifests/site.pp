@@ -28,6 +28,11 @@ node default {
   # Example:
   #   class { 'my_class': }
   Archive <| tag == 'comply' |> {
-    provider => 'wget',
+    provider         => 'wget',
+    download_options => [
+      "--certificate=${facts['ssldir']}/certs/${trusted['certname']}.pem",
+      "--private-key=${facts['ssldir']}/private_keys/${trusted['certname']}.pem",
+      "--ca-certificate=${facts['ssldir']}/certs/ca.pem"
+    ],
   }
 }
