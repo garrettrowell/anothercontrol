@@ -27,9 +27,9 @@ mod 'puppetlabs-powershell', '5.1.0'
 mod 'puppetlabs-pwshlib', '0.10.2'
 mod 'puppetlabs-registry', '4.1.0'
 
-mod 'cem_linux',
-  git:    'git@github.com:puppetlabs/puppetlabs-cem_linux.git',
-  tag: 'v1.3.2'
+#mod 'cem_linux',
+#  git:    'git@github.com:puppetlabs/puppetlabs-cem_linux.git',
+#  tag: 'v1.3.2'
 
 mod 'puppetlabs-concat', '7.2.0'
 mod 'puppetlabs-puppet_agent', '4.12.1'
