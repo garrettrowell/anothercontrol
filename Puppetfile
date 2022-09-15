@@ -26,3 +26,8 @@ mod 'puppetlabs-chocolatey', '6.2.0'
 mod 'puppetlabs-powershell', '5.1.0'
 mod 'puppetlabs-pwshlib', '0.10.2'
 mod 'puppetlabs-registry', '4.1.0'
+
+mod 'cem_linux',
+  git:    'git@github.com:puppetlabs/puppetlabs-cem_linux.git',
+  tag: 'v1.3.2'
+
