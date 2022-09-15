@@ -28,6 +28,6 @@ node default {
   # Example:
   #   class { 'my_class': }
   Archive <| tag == 'comply' |> {
-    provider => 'ruby',
+    provider => 'wget',
   }
 }
