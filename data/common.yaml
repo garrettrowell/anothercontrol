@@ -1,2 +1,8 @@
 ---
-message: "This node is using common data"
+lookup_options:
+  cem_linux::config:
+    merge:
+      strategy: deep
+      knockout_prefix: '!'
+  cem_linux::grub2_superuser_password:
+    convert_to: 'Sensitive'

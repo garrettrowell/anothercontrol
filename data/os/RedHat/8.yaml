@@ -1,0 +1,22 @@
+---
+
+cem_linux::config:
+  control_configs:
+    ensure_bootloader_password_is_set:
+      hash_superuser_password: true
+      replace_password_file: false
+    ensure_permissions_on_etcsshsshd_config_are_configured:
+      permit_root_login: 'no'
+      max_sessions: 3
+      ciphers:
+        - aes128-ctr
+        - aes192-ctr
+        - aes256-ctr
+    ensure_logrotate_is_configured:
+      merge_defaults: true
+      etc_logrotate_settings:
+        compress: true
+        create: true
+        dateext: true
+        rotate: 5
+        rotate_every: 'weekly'

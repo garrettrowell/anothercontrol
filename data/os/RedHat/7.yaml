@@ -1,0 +1,14 @@
+---
+cem_linux::config:
+  control_configs:
+    ensure_logrotate_is_configured:
+      merge_defaults: true
+      etc_logrotate_settings:
+        compress: true
+        create: true
+        dateext: true
+        rotate: 5
+        rotate_every: 'weekly'
+    ensure_bootloader_password_is_set:
+      hash_superuser_password: true
+      replace_password_file: false

@@ -5,8 +5,10 @@ defaults:
   datadir: "data"
 
 hierarchy:
-  - name: "Yaml backend"
-    data_hash: yaml_data
+  - name: "Per-node data (yaml version)"
+    path: "nodes/%{::trusted.certname}.yaml"
+  - name: "OS level"
+    path: "os/%{facts.os.family}/%{facts.os.release.major}.yaml"
+  - name: "Other YAML hierarchy levels"
     paths:
-      - "nodes/%{trusted.certname}.yaml"
       - "common.yaml"
