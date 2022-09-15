@@ -31,3 +31,13 @@ mod 'cem_linux',
   git:    'git@github.com:puppetlabs/puppetlabs-cem_linux.git',
   tag: 'v1.3.2'
 
+mod 'puppetlabs-concat', '7.2.0'
+mod 'puppetlabs-puppet_agent', '4.12.1'
+mod 'puppetlabs-apt', '9.0.0'
+mod 'puppetlabs-facts', '1.4.0'
+mod 'puppetlabs-augeas_core', '1.2.0'
+mod 'puppetlabs-firewall', '3.5.0'
+mod 'puppet-firewalld', '4.5.1'
+mod 'puppet-logrotate', '6.1.0'
+mod 'puppet-selinux', '3.4.1'
+mod 'puppet-systemd', '3.10.0'
