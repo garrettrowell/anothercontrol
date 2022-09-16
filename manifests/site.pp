@@ -30,11 +30,12 @@ node default {
 
   # requires that wget is installed on a node
   Archive <| tag == 'comply' |> {
-    provider         => 'wget',
-    download_options => [
-      "--certificate=${facts['ssldir']}/certs/${trusted['certname']}.pem",
-      "--private-key=${facts['ssldir']}/private_keys/${trusted['certname']}.pem",
-      "--ca-certificate=${facts['ssldir']}/certs/ca.pem"
-    ],
+    provider              => 'puppet_curl',
+    #    provider         => 'wget',
+    #    download_options => [
+    #      "--certificate=${facts['ssldir']}/certs/${trusted['certname']}.pem",
+    #      "--private-key=${facts['ssldir']}/private_keys/${trusted['certname']}.pem",
+    #      "--ca-certificate=${facts['ssldir']}/certs/ca.pem"
+    #    ],
   }
 }
