@@ -28,14 +28,9 @@ node default {
   # Example:
   #   class { 'my_class': }
 
-  # requires that wget is installed on a node
+  # override comply module to use puppet's vendored curl
   Archive <| tag == 'comply' |> {
-    provider              => 'puppet_curl',
-    #    provider         => 'wget',
-    #    download_options => [
-    #      "--certificate=${facts['ssldir']}/certs/${trusted['certname']}.pem",
-    #      "--private-key=${facts['ssldir']}/private_keys/${trusted['certname']}.pem",
-    #      "--ca-certificate=${facts['ssldir']}/certs/ca.pem"
-    #    ],
+    provider => 'puppet_curl',
   }
+
 }
