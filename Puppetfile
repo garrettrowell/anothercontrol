@@ -41,3 +41,5 @@ mod 'puppet-firewalld', '4.5.1'
 mod 'puppet-logrotate', '6.1.0'
 mod 'puppet-selinux', '3.4.1'
 mod 'puppet-systemd', '3.10.0'
+
+mod 'ipcrm-echo', '0.1.7'
