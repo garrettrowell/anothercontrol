@@ -10,6 +10,8 @@ class profile::pe_backups (
 
   $_a_string = sprintf('%02d', $backup_minute)
   echo { "${backup_minute} => ${_a_string}": }
+  $_another_string = sprintf('%02d', $backup_hour)
+  echo { "${backup_hour} => ${_another_string}": }
 
   cron {
     default:
