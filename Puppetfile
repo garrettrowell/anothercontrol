@@ -43,3 +43,4 @@ mod 'puppet-selinux', '3.4.1'
 mod 'puppet-systemd', '3.10.0'
 
 mod 'ipcrm-echo', '0.1.7'
+mod 'WhatsARanjit-node_manager', '0.7.5'
