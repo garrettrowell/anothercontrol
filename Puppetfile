@@ -44,3 +44,6 @@ mod 'puppet-systemd', '3.10.0'
 
 mod 'ipcrm-echo', '0.1.7'
 mod 'WhatsARanjit-node_manager', '0.7.5'
+
+mod 'visual',
+  git: 'git@github.com:garrettrowell/puppet-visual.git'
