@@ -33,6 +33,7 @@ node default {
     provider => 'puppet_curl',
   }
 
+  include test_noop
   Resources <| tag == 'test_noop' |> {
     noop => false,
   }
