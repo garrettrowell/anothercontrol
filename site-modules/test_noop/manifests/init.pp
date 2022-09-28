@@ -1,9 +1,8 @@
 class test_noop () {
 
-  Resources {
+  class { 'test_noop::file':
     noop => false,
   }
 
-  include test_noop::file
   include test_noop::service
 }
