@@ -1,7 +1,6 @@
 class test_noop::service () {
 
-  service { 'pxp-agent':
+  Service <| name == 'pxp-agent' |> {
     ensure => running,
   }
-
 }
