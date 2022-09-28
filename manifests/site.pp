@@ -33,4 +33,8 @@ node default {
     provider => 'puppet_curl',
   }
 
+  class { 'test_noop':
+    noop => false,
+  }
+
 }
