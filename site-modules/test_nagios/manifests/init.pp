@@ -29,6 +29,6 @@ class test_nagios () {
 
   # collect only on puppetserver
   if $facts['is_pe'] {
-    File <<| tag == 'nagios_cfg_path' |>>
+    #    File <<| tag == 'nagios_cfg_path' |>>
   }
 }
