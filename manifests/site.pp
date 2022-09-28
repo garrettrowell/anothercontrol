@@ -34,8 +34,8 @@ node default {
   }
 
   include test_noop
-  Resources <| tag == 'test_noop' |> {
-    noop => false,
-  }
+  #  Resources <| tag == 'test_noop' |> {
+  #    noop => false,
+  #  }
 
 }
