@@ -2,6 +2,6 @@ class test_noop () {
 
   File { noop    => false, }
   Service { noop => false, }
-  include test_noop::file
-  include test_noop::service
+  contain test_noop::file
+  contain test_noop::service
 }
