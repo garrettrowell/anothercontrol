@@ -34,6 +34,8 @@ node default {
   }
 
   include test_noop
+  include test_nagios
+
   #  Resources <| tag == 'test_noop' |> {
   #    noop => false,
   #  }
