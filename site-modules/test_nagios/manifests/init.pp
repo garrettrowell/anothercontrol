@@ -36,8 +36,8 @@ class test_nagios (
     }
   }
 
-  # Do stuff only on puppetserver as a nagios analog
-  #  if $facts['is_pe'] {
+  # Do stuff when appgroup set to nagios
+  if $facts['org']['appgroup'] == 'nagios' {
     # Get permutations of $facts['org']['country'] from puppetdb
     $org_country_query = 'fact_contents[value] { path = ["org", "country"] group by value}'
     $_country = puppetdb_query($org_country_query)
@@ -100,6 +100,6 @@ class test_nagios (
     File <| tag == 'nagios_cfg_path' |>
     -> Nagios_service <<| |>>
     -> Nagios_host <<| |>>
-    #  }
+  }
 
 }
