@@ -65,9 +65,11 @@ class test_nagios () {
         $c_c_elms = split($cust_country_path, '/')
         $c_c_elms.each |$index, $value| {
           $n_p3 = join([$nagios_cfg_base_path, $c_c_elms[0, $index+1]], '/')
-          file { $n_p3:
-            ensure => directory,
-            tag    => 'nagios_cfg_path',
+          unless defined(File[$n_p3]) {
+            file { $n_p3:
+              ensure => directory,
+              tag    => 'nagios_cfg_path',
+            }
           }
         }
       }
