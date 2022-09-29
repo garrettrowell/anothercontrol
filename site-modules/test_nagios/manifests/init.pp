@@ -9,50 +9,33 @@ class test_nagios () {
   }
   # lint:endignore
 
-  # need to split the path so that we can rebuild it piece by piece
-  $nagios_cfg_path_elms = split($nagios_cfg_path, '/')
-  #
-  #  # /tmp/omd/sites/ops/etc/nagios/conf.d/cust
-  #  # export the full directory structure
-  $nagios_cfg_path_elms.each |$index, $value| {
-    unless $index <= 1 {
-      $new_path = join($nagios_cfg_path_elms[0,$index], '/')
-      echo { "new_path = ${new_path}": }
-  #      @@file { "${trusted['certname']} - ${new_path}":
-  #        path   => $new_path,
-  #        ensure => directory,
-  #        tag    => 'nagios_cfg_path',
-  #      }
-    }
-  }
-
   # Do stuff only on puppetserver as a nagios analog
   if $facts['is_pe'] {
     # Get permutations of $facts['org']['country'] from puppetdb
     $org_country_query = 'fact_contents[value] { path = ["org", "country"] group by value}'
     $_country = puppetdb_query($org_country_query)
-    echo { "${_country}": }
 
     # Get permutations of $facts['org']['env'] from puppetdb
     $org_env_query = 'fact_contents[value] { path = ["org", "env"] group by value}'
     $_env = puppetdb_query($org_env_query)
-    echo { "${_env}": }
 
     # Get permutations of $facts['org']['env'] from puppetdb
     $org_customer_query = 'fact_contents[value] { path = ["org", "cust"] group by value}'
     $_customer = puppetdb_query($org_customer_query)
-    echo { "${_customer}": }
 
-    # Only concerned with the base path for now
+    # Ensure that the base path exists
     $cfg_elms = split($nagios_cfg_base_path, '/')
+    $base_size = $cfg_elms.size
     $cfg_elms.each |$index, $value| {
       unless $index < 1 {
         $n_p1 = join($cfg_elms[0, $index+1], '/')
-        echo { "n_p1 = ${n_p1}": }
+        file { $n_p1:
+          ensure => directory,
+          tag    => 'nagios_cfg_path',
+        }
       }
     }
 
-    $base_size = $cfg_elms.size
     # Build possible paths when customer undef
     $_env.each |$env_elm| {
       $_country.each |$country_elm| {
@@ -61,7 +44,10 @@ class test_nagios () {
         $e_c_elms.each |$index, $value| {
           unless $index < $base_size {
             $n_p2 = join($e_c_elms[0, $index+1], '/')
-            echo { "n_p2 = ${n_p2}": }
+            file { $n_p2:
+              ensure => directory,
+              tag    => 'nagios_cfg_path',
+            }
           }
         }
       }
@@ -75,7 +61,10 @@ class test_nagios () {
         $c_c_elms.each |$index, $value| {
           unless $index < $base_size {
             $n_p3 = join($c_c_elms[0, $index+1], '/')
-            echo { "n_p3 = ${n_p3}": }
+            file { $n_p3:
+              ensure => directory,
+              tag    => 'nagios_cfg_path',
+            }
           }
         }
       }
