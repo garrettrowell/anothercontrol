@@ -44,34 +44,37 @@ class test_nagios () {
       }
     }
 
-    # Try and simplify
-    $_env.each |$env_elm| {
-      $_country.each |$country_elm| {
-        $env_country_path = "${env_elm['value']}/${country_elm['value']}"
-        $ec_pe = split($env_country_path, '/')
-        $ec_pe.each |$index, $value| {
-          $n_t = join([$nagios_cfg_base_path, $ec_pe[0,$index+1]],'/')
-          echo { "${n_t}": }
-        }
-      }
-    }
-
     # Build possible paths when customer undef
     $_env.each |$env_elm| {
       $_country.each |$country_elm| {
-        $env_country_path = "${nagios_cfg_base_path}/${env_elm['value']}/${country_elm['value']}"
+        $env_country_path = "${env_elm['value']}/${country_elm['value']}"
         $e_c_elms = split($env_country_path, '/')
         $e_c_elms.each |$index, $value| {
-          unless $index < $base_size {
-            $n_p2 = join($e_c_elms[0, $index+1], '/')
-            file { $n_p2:
-              ensure => directory,
-              tag    => 'nagios_cfg_path',
-            }
+          $n_p2 = join([$nagios_cfg_base_path, $e_c_elms[0, $index+1]], '/')
+          file { $n_p2:
+            ensure => directory,
+            tag    => 'nagios_cfg_path',
           }
         }
       }
     }
+
+    #    # Build possible paths when customer undef
+    #    $_env.each |$env_elm| {
+    #      $_country.each |$country_elm| {
+    #        $env_country_path = "${nagios_cfg_base_path}/${env_elm['value']}/${country_elm['value']}"
+    #        $e_c_elms = split($env_country_path, '/')
+    #        $e_c_elms.each |$index, $value| {
+    #          unless $index < $base_size {
+    #            $n_p2 = join($e_c_elms[0, $index+1], '/')
+    #            file { $n_p2:
+    #              ensure => directory,
+    #              tag    => 'nagios_cfg_path',
+    #            }
+    #          }
+    #        }
+    #      }
+    #    }
 
     # Build possible paths when customer defined
     $_customer.each |$cust_elm| {
