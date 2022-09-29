@@ -26,15 +26,27 @@ class test_nagios () {
     }
   }
 
-  # Get permutations of $facts['org']['country'] from puppetdb
-  $org_country_query = 'fact_contents[value] { path = ["org", "country"] group by value}'
-  $_country = puppetdb_query($org_country_query)
-  echo { "${_country}": }
+  # Do stuff only on puppetserver as a nagios analog
+  if $facts['is_pe'] {
+    # Get permutations of $facts['org']['country'] from puppetdb
+    $org_country_query = 'fact_contents[value] { path = ["org", "country"] group by value}'
+    $_country = puppetdb_query($org_country_query)
+    echo { "${_country}": }
 
-  # Get permutations of $facts['org']['env'] from puppetdb
-  $org_env_query = 'fact_contents[value] { path = ["org", "env"] group by value}'
-  $_env = puppetdb_query($org_env_query)
-  echo { "${_env}": }
+    # Get permutations of $facts['org']['env'] from puppetdb
+    $org_env_query = 'fact_contents[value] { path = ["org", "env"] group by value}'
+    $_env = puppetdb_query($org_env_query)
+    echo { "${_env}": }
+
+    # Get permutations of $facts['org']['env'] from puppetdb
+    $org_customer_query = 'fact_contents[value] { path = ["org", "customer"] group by value}'
+    $_customer = puppetdb_query($org_customer_query)
+    echo { "${_customer}": }
+
+    $_env.each |$elm| {
+      echo { "${elm['value']}": }
+    }
+  }
 
   # collect only on puppetserver
   #  if $facts['is_pe'] {
