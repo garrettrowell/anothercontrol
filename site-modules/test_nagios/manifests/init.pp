@@ -78,6 +78,7 @@ class test_nagios () {
       }
     }
 
+    File <| tag == 'nagios_cfg_path' |> ->
     Nagios_host <<| |>>
   }
 
