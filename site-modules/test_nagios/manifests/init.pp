@@ -61,6 +61,7 @@ class test_nagios () {
         $e_c_elms.each |$index, $value| {
           unless $index <= $base_size {
             $n_p2 = join($e_c_elms[0, $index], '/')
+            echo { "n_p2 = ${n_p2}": }
           }
         }
       }
