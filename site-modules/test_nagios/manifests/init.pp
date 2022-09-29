@@ -39,7 +39,7 @@ class test_nagios () {
     echo { "${_env}": }
 
     # Get permutations of $facts['org']['env'] from puppetdb
-    $org_customer_query = 'fact_contents[value] { path = ["org", "customer"] group by value}'
+    $org_customer_query = 'fact_contents[value] { path = ["org", "cust"] group by value}'
     $_customer = puppetdb_query($org_customer_query)
     echo { "${_customer}": }
 
