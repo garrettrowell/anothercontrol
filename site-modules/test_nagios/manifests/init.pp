@@ -43,7 +43,7 @@ class test_nagios () {
     $_customer = puppetdb_query($org_customer_query)
     echo { "${_customer}": }
 
-    $_env.each |$elm| {
+    $_env[0].each |$elm| {
       echo { "${elm['value']}": }
     }
   }
