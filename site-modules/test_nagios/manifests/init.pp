@@ -26,10 +26,16 @@ class test_nagios () {
     }
   }
 
-  # get every permutation of 'org' fact from puppetdb
-  $org_query = 'facts[value] {name = "org"}'
-  $_org = puppetdb_query($org_query)
-  echo { "${_org}": }
+  # Get permutations of $facts['org']['country'] from puppetdb
+  $org_country_query = 'fact_contents[value] { path = ["org", "country"] group by value}'
+  $_country = puppetdb_query($org_country_query)
+  echo { "${_country}": }
+
+  # Get permutations of $facts['org']['env'] from puppetdb
+  $org_env_query = 'fact_contents[value] { path = ["org", "env"] group by value}'
+  $_env = puppetdb_query($org_env_query)
+  echo { "${_env}": }
+
   # collect only on puppetserver
   #  if $facts['is_pe'] {
   #    File <<| tag == 'nagios_cfg_path' |>>
