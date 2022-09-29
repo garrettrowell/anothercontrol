@@ -44,6 +44,18 @@ class test_nagios () {
       }
     }
 
+    # Try and simplify
+    $_env.each |$env_elm| {
+      $_country.each |$country_elm| {
+        $env_country_path = "${env_elm['value']}/${country_elm['value']}"
+        $ec_pe = split($env_country_path, '/')
+        $ec_pe.each |$index, $value| {
+          $n_t = join([$nagios_cfg_base_path, $ec_pe[0,$index+1],'/')
+          echo { "${n_t}": }
+        }
+      }
+    }
+
     # Build possible paths when customer undef
     $_env.each |$env_elm| {
       $_country.each |$country_elm| {
@@ -78,6 +90,7 @@ class test_nagios () {
       }
     }
 
+    # ensure the directory path we create above happens before collecting the nagios_host resources
     File <| tag == 'nagios_cfg_path' |> ->
     Nagios_host <<| |>>
   }
