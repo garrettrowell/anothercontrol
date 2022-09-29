@@ -8,6 +8,14 @@ class test_nagios () {
     default => "${nagios_cfg_base_path}/cust/${facts['org']['customer']}/${facts['org']['country']}/${facts['networking']['hostname']}.cfg",
   }
   # lint:endignore
+  @@nagios_host { $facts['networking']['hostname']:
+    use        => 'imatest',
+    host_name  => $facts['networking']['hostname'],
+    alias      => $facts['networking']['hostname'],
+    address    => $facts['networking']['ip'],
+    hostgroups => $facts['org']['env'],
+    target     => $nagios_cfg_path,
+  }
 
   # Do stuff only on puppetserver as a nagios analog
   if $facts['is_pe'] {
@@ -69,10 +77,8 @@ class test_nagios () {
         }
       }
     }
+
+    Nagios_host <<| |>>
   }
 
-  # collect only on puppetserver
-  #  if $facts['is_pe'] {
-  #    File <<| tag == 'nagios_cfg_path' |>>
-  #  }
 }
