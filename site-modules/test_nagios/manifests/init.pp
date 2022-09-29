@@ -61,7 +61,7 @@ class test_nagios () {
     # Build possible paths when customer defined
     $_customer.each |$cust_elm| {
       $_country.each |$country_elm| {
-        $cust_country_path = "${cust_elm['value']}/${country_elm['value']}"
+        $cust_country_path = "cust/${cust_elm['value']}/${country_elm['value']}"
         $c_c_elms = split($cust_country_path, '/')
         $c_c_elms.each |$index, $value| {
           $n_p3 = join([$nagios_cfg_base_path, $c_c_elms[0, $index+1]], '/')
