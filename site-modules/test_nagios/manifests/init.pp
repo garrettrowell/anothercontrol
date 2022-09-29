@@ -43,25 +43,34 @@ class test_nagios () {
     $_customer = puppetdb_query($org_customer_query)
     echo { "${_customer}": }
 
+    # Only concerned with the base path for now
+    $cfg_elms = split($nagios_cfg_base_path, '/')
+    $cfg_elms.each |$index, $value| {
+      unless $index <= 1 {
+        $n_p1 = join($cfg_elms[0, $index], '/')
+        echo { "n_p1 = ${n_p1}": }
+      }
+    }
+
+    $base_size = $cfg_elms.size
     # Build possible paths when customer undef
     $_env.each |$env_elm| {
       $_country.each |$country_elm| {
-        echo { "${nagios_cfg_base_path}/${env_elm['value']}/${country_elm['value']}": }
+        $env_country_path = "${nagios_cfg_base_path}/${env_elm['value']}/${country_elm['value']}"
+        $e_c_elms = split($env_country_path, '/')
+        $e_c_elms.each |$index, $value| {
+          unless $index <= $base_size {
+            $n_p2 = join($e_c_elms[0, $index], '/')
+          }
+        }
       }
     }
 
     # Build possible paths when customer defined
     $_customer.each |$cust_elm| {
       $_country.each |$country_elm| {
-        echo { "${nagios_cfg_base_path}/${cust_elm['value']}/${country_elm['value']}": }
+        $cust_country_path = "${nagios_cfg_base_path}/${cust_elm['value']}/${country_elm['value']}"
       }
-    }
-
-    # Only concerned with the base path for now
-    $cfg_elms = split($nagios_cfg_base_path, '/')
-    $cfg_elms.each |$index, $value| {
-      $n_p = join($cfg_elms[0,$index], '/')
-      echo { "n_p = ${n_p}": }
     }
   }
 
