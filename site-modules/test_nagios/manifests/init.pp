@@ -71,6 +71,13 @@ class test_nagios () {
     $_customer.each |$cust_elm| {
       $_country.each |$country_elm| {
         $cust_country_path = "${nagios_cfg_base_path}/${cust_elm['value']}/${country_elm['value']}"
+        $c_c_elms = split($cust_country_path, '/')
+        $c_c_elms.each |$index, $value| {
+          unless $index < $base_size {
+            $n_p3 = join($c_c_elms[0, $index+1], '/')
+            echo { "n_p3 = ${n_p3}": }
+          }
+        }
       }
     }
   }
