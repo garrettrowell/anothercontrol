@@ -46,7 +46,7 @@ class test_nagios () {
     # Only concerned with the base path for now
     $cfg_elms = split($nagios_cfg_base_path, '/')
     $cfg_elms.each |$index, $value| {
-      unless $index <= 1 {
+      unless $index < 1 {
         $n_p1 = join($cfg_elms[0, $index+1], '/')
         echo { "n_p1 = ${n_p1}": }
       }
@@ -59,8 +59,8 @@ class test_nagios () {
         $env_country_path = "${nagios_cfg_base_path}/${env_elm['value']}/${country_elm['value']}"
         $e_c_elms = split($env_country_path, '/')
         $e_c_elms.each |$index, $value| {
-          unless $index <= $base_size {
-            $n_p2 = join($e_c_elms[0, $index], '/')
+          unless $index < $base_size {
+            $n_p2 = join($e_c_elms[0, $index+1], '/')
             echo { "n_p2 = ${n_p2}": }
           }
         }
