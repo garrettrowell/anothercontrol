@@ -6,3 +6,8 @@ lookup_options:
       knockout_prefix: '!'
   cem_linux::grub2_superuser_password:
     convert_to: 'Sensitive'
+
+test_nagios::services:
+  'CPU Usage':
+    check_command: 'check_nrpe_long!check_cpu_stats'
+    servicegroups: 'engr, prod'

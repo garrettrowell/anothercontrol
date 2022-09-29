@@ -1,4 +1,7 @@
-class test_nagios () {
+class test_nagios (
+  Hash   $services = {},
+  String $host_use = 'standard-server'
+) {
   # tmp should be removed from path once verified everything works
   $nagios_cfg_base_path = '/tmp/omd/sites/ops/etc/nagios/conf.d'
 
@@ -8,13 +11,29 @@ class test_nagios () {
     default => "${nagios_cfg_base_path}/cust/${facts['org']['customer']}/${facts['org']['country']}/${facts['networking']['hostname']}.cfg",
   }
   # lint:endignore
+
+  # Every node should export its host entry for nagios
   @@nagios_host { $facts['networking']['hostname']:
-    use        => 'imatest',
+    use        => $host_use,
     host_name  => $facts['networking']['hostname'],
     alias      => $facts['networking']['hostname'],
     address    => $facts['networking']['ip'],
     hostgroups => $facts['org']['env'],
     target     => $nagios_cfg_path,
+  }
+
+  # Dynamically build service definitions from hieradata
+  #   for example:
+  # test_nagios::services:
+  #   'CPU Usage':
+  #     check_command: 'check_nrpe_long!check_cpu_stats'
+  #     servicegroups: 'engr, prod'
+  $services.each |$service_name, $service_cfg| {
+    @@nagios_service { "${facts['networking']['hostname']}-${service_name}":
+      service_description => $service_name,
+      target              => $nagios_cfg_path,
+      *                   => $service_cfg,
+    }
   }
 
   # Do stuff only on puppetserver as a nagios analog
@@ -78,8 +97,9 @@ class test_nagios () {
     }
 
     # ensure the directory path we create above happens before collecting the nagios_host resources
-    File <| tag == 'nagios_cfg_path' |> ->
-    Nagios_host <<| |>>
+    File <| tag == 'nagios_cfg_path' |>
+    -> Nagios_service <<| |>>
+    -> Nagios_host <<| |>>
   }
 
 }
