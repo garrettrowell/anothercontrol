@@ -43,8 +43,18 @@ class test_nagios () {
     $_customer = puppetdb_query($org_customer_query)
     echo { "${_customer}": }
 
-    $_env[0].each |$elm| {
-      echo { "${elm['value']}": }
+    # Build possible paths when customer undef
+    $_env.each |$env_elm| {
+      $_country.each |$country_elm| {
+        echo { "${nagios_cfg_base_path}/${env_elm['value']}/${country_elm['value']}": }
+      }
+    }
+
+    # Build possible paths when customer defined
+    $_customer.each |$cust_elm| {
+      $_country.each |$country_elm| {
+        echo { "${nagios_cfg_base_path}/${cust_elm['value']}/${country_elm['value']}": }
+      }
     }
   }
 
