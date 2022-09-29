@@ -50,7 +50,7 @@ class test_nagios () {
         $env_country_path = "${env_elm['value']}/${country_elm['value']}"
         $ec_pe = split($env_country_path, '/')
         $ec_pe.each |$index, $value| {
-          $n_t = join([$nagios_cfg_base_path, $ec_pe[0,$index+1],'/')
+          $n_t = join([$nagios_cfg_base_path, $ec_pe[0,$index+1]],'/')
           echo { "${n_t}": }
         }
       }
