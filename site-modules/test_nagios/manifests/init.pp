@@ -3,7 +3,7 @@ class test_nagios () {
   $nagios_cfg_base_path = '/tmp/omd/sites/ops/etc/nagios/conf.d'
 
   # lint:ignore:140chars
-  $nagios_cfg_path = $customer ? {
+  $nagios_cfg_path = $facts['org']['customer'] ? {
     undef   => "${nagios_cfg_base_path}/${facts['org']['env']}/${facts['org']['country']}/${facts['networking']['hostname']}.cfg",
     default => "${nagios_cfg_base_path}/cust/${facts['org']['customer']}/${facts['org']['country']}/${facts['networking']['hostname']}.cfg",
   }
@@ -28,7 +28,7 @@ class test_nagios () {
     $_env = puppetdb_query($org_env_query)
 
     # Get permutations of $facts['org']['env'] from puppetdb
-    $org_customer_query = 'fact_contents[value] { path = ["org", "cust"] group by value}'
+    $org_customer_query = 'fact_contents[value] { path = ["org", "customer"] group by value}'
     $_customer = puppetdb_query($org_customer_query)
 
     # Ensure that the base path exists
