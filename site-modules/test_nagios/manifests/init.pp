@@ -46,7 +46,7 @@ class test_nagios () {
     # Only concerned with the base path for now
     $cfg_elms = split($nagios_cfg_base_path, '/')
     $cfg_elms.each |$index, $value| {
-      unless $index <= 1 {
+      unless $index < 1 {
         $n_p1 = join($cfg_elms[0, $index], '/')
         echo { "n_p1 = ${n_p1}": }
       }
