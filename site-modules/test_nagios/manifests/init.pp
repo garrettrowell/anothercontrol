@@ -56,6 +56,15 @@ class test_nagios () {
         echo { "${nagios_cfg_base_path}/${cust_elm['value']}/${country_elm['value']}": }
       }
     }
+
+    #
+    $cfg_elms = split($nagios_cfg_path, '/')
+    $cfg_elms.each |$index, $value| {
+      unless $index <= 1 {
+        $n_p = join($cfg_elms[0,$index], '/')
+        echo { "n_p = ${n_p}": }
+      }
+    }
   }
 
   # collect only on puppetserver
