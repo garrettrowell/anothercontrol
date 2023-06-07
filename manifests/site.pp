@@ -42,7 +42,7 @@ node default {
 
 }
 
-node /primary/ {
+node 'pe-primary.garrett.rowell' {
   ini_setting { 'policy-based autosigning':
     setting => 'autosign',
     path    => "${::settings::confdir}/puppet.conf",
