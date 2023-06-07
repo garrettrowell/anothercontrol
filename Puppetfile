@@ -53,6 +53,6 @@ mod 'visual',
 mod 'danieldreier-autosign', '0.3.0'
 mod 'puppet-catalog_diff',
   git: 'https://github.com/voxpupuli/puppet-catalog_diff.git',
-  tag: 'v2.3.0'
+  tag: 'v3.0.0'
 mod 'puppetlabs-puppet_authorization', '0.5.1'
 mod 'puppetlabs-hocon', '1.1.0'
