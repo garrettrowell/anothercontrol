@@ -29,12 +29,12 @@ node default {
   #   class { 'my_class': }
 
   # override comply module to use puppet's vendored curl
-  Archive <| tag == 'comply' |> {
-    provider => 'puppet_curl',
-  }
+  #Archive <| tag == 'comply' |> {
+  #  provider => 'puppet_curl',
+  #}
 
-  include test_noop
-  include test_nagios
+  #include test_noop
+  #include test_nagios
 
   #  Resources <| tag == 'test_noop' |> {
   #    noop => false,
