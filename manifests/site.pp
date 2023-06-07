@@ -72,5 +72,17 @@ node 'pe-primary.garrett.rowell' {
     allow                => 'catalog-diff',
     sort_order           => 500,
     path                 => '/etc/puppetlabs/puppetserver/conf.d/auth.conf',
+    notify               => Service['pe-puppetserver'],
   }
+
+  puppet_authorization::rule { 'garrett jank certless catalog':
+    match_request_path   => '^/puppet/v4/catalog',
+    match_request_type   => 'regex',
+    match_request_method => 'post',
+    allow                => '*',
+    sort_order           => 500,
+    path                 => '/etc/puppetlabs/puppetserver/conf.d/auth.conf',
+    notify               => Service['pe-puppetserver'],
+  }
+
 }
