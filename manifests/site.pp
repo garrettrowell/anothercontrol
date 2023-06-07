@@ -43,34 +43,4 @@ node default {
 }
 
 node 'pe-primary.garrett.rowell' {
-  ini_setting { 'policy-based autosigning':
-    setting => 'autosign',
-    path    => "${::settings::confdir}/puppet.conf",
-    section => 'master',
-    value   => '/opt/puppetlabs/puppet/bin/autosign-validator',
-    notify  => Service['pe-puppetserver'],
-  }
-
-  class { ::autosign:
-    ensure => 'latest',
-    config => {
-      'general' => {
-        'loglevel' => 'INFO',
-      },
-      'jwt_token' => {
-        'secret'   => 'hunter2',
-        'validity' => '7200',
-      }
-    },
-  }
-
-  #catalog diff
-  puppet_authorization::rule { 'catalog-diff certless catalog':
-    match_request_path   => '^/puppet/v4/catalog',
-    match_request_type   => 'regex',
-    match_request_method => 'post',
-    allow                => 'catalog-diff',
-    sort_order           => 500,
-    path                 => '/etc/puppetlabs/puppetserver/conf.d/auth.conf',
-  }
 }
