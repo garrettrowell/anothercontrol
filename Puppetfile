@@ -51,4 +51,6 @@ mod 'visual',
   branch: 'main'
 
 mod 'danieldreier-autosign', '0.3.0'
-mod 'puppet-catalog_diff', '2.3.0'
+mod 'puppet-catalog_diff',
+  git: 'https://github.com/voxpupuli/puppet-catalog_diff.git',
+  tag: 'v3.0.0'
