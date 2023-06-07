@@ -50,3 +50,4 @@ mod 'visual',
   git: 'git@github.com:garrettrowell/puppet-visual.git',
   branch: 'main'
 
+mod 'danieldreier-autosign', '0.3.0'
