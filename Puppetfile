@@ -51,3 +51,4 @@ mod 'visual',
   branch: 'main'
 
 mod 'danieldreier-autosign', '0.3.0'
+mod 'puppet-catalog_diff', '2.3.0'
