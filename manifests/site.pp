@@ -79,7 +79,7 @@ node 'pe-primary.garrett.rowell' {
     match_request_path   => '^/puppet/v4/catalog',
     match_request_type   => 'regex',
     match_request_method => 'post',
-    allow                => '*',
+    allow                => 'pe-primary.garrett.rowell',
     sort_order           => 500,
     path                 => '/etc/puppetlabs/puppetserver/conf.d/auth.conf',
     notify               => Service['pe-puppetserver'],
